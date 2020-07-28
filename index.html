@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/Aircon.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <div class="container">
+            <div class="wrap">
+                <div class="topmenu">
+                    <div class="form">
+                        <div class="title">空氣品質指標 (AQI)</div>
+                        <select name="" id="selectcity" @change="ChangeCountry">
+                            <option value="請選擇地區" selected disabled>請選擇地區</option>
+                            <option :value="item" v-for="item in Allcountries" :key="item">{{ item }}</option>
+                        </select>
+                    </div>
+                    <div class="reference">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="良好">0~50</td>
+                                    <td class="普通">51~100</td>
+                                    <td class="退敏感族群不健康">101~150</td>
+                                    <td class="退所有族群不健康">151~200</td>
+                                    <td class="非常不健康">201~300</td>
+                                    <td class="危害">301~400</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>良好</td>
+                                    <td>普通</td>
+                                    <td>退敏感族群不健康</td>
+                                    <td>退所有族群不健康</td>
+                                    <td> 非常不健康</td>
+                                    <td>危害</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="center">
+                    <div class="selectedcity">
+                        <div class="center_city">{{ SelectedCountry }}</div>
+                        <hr>
+                        <span class="time">{{ NewdataPu }} 更新</span>
+                    </div>
+                </div>
+
+                <div class="resultbyarea">
+                    <div class="firstarea" :class="{'displaytable' : hide}">
+                        <table>
+                            <thead>
+                                    <tr>
+                                        <td>{{NewdataAQ.County}}</td>
+                                        <td :class="NewdataAQ.Status">{{NewdataAQ.AQI}}</td>
+                                    </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td>臭氧<span>O<sub>3</sub>(ppb)</span></td>
+                                        <td class="bet">{{NewdataAQ.O3}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>懸浮微粒<span>PM<sub>10</sub>(μg/m<sup>3</sup>)</span></td>
+                                        <td class="bet">{{NewdataAQ.PM10}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>細懸浮微粒<span>PM<sub>2.5</sub>(μg/m<sup>3</sup>)</span></td>
+                                        <td class="bet">{{NewdataAQ['PM2.5']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>一氧化碳<span>CO(ppm)</span></td>
+                                        <td class="bet">{{NewdataAQ.NO}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>二氧化硫<span>SO<sub>2</sub>(ppb)</span></td>
+                                        <td class="bet">{{NewdataAQ.SO2}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>二氧化氮<span>NO<sub>2</sub>(ppb)</span></td>
+                                        <td class="bet">{{NewdataAQ.NO2}}</td>
+                                    </tr>
+                            </tbody>
+                        </table>        
+                    </div>
+                    <div>
+                        <ul class="eacharea">
+                            <li v-for="item in Newdata" :key="item.SiteName">
+                                <h2>{{item.SiteName}}</h2>
+                                <h2 :class="item.Status">{{item.AQI}}</h2>
+                            </li>
+                            <li style="visibility: hidden">
+                                <h2></h2>
+                                <h2></h2>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./Aircon.js"></script>
+</body>
+
+</html>
